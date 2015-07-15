@@ -1,7 +1,12 @@
-## Put comments here that give an overall description of what your
-## functions do
+## makeCacheMatrix creates an object that includes a matrix and 
+## may include a cache containing an inverse of the matrix.
+## cacheSolve will take that object and get the inverse of the matirx
+## and response with it and save it in the cache os if it is called again
+## it can get the inverse form the cache instead of re-calculating it.
+## This dose not include the logic of matching a new matrix to an existing 
+## makeCacheMatrix object.
 
-## This function gets a object that includes a matrix and may include a cache
+## This function creates an object that includes a matrix and may include a cache
 ## containing an inverse of the matrix
 
 makeCacheMatrix <- function(x = matrix()) {
@@ -19,20 +24,21 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## This function get an inverse of a matrix and 
+## This function gets an inverse of a matrix and 
 ## will get the inverse from a cache if available
 ## It uses objects that look like the output of
 ## makeCacheMatrix()
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
-        i <- x$get.inverse()
-        if(!is.null(i)) {
+        inv <- x$get.inverse()
+        if(!is.null(inv)) {
                 message("getting cached data")
-                return(i)
+                return(inv)
         }
         data <- x$get()
         i <- solve(data, ...)
-        x$set.inverse(i)
+        x$set.inverse(inv)
         i
 }
+
